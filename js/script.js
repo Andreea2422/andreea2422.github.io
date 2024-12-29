@@ -3,8 +3,6 @@ const circle = document.querySelector('.landing-background.second-bg');
 const letters = document.querySelectorAll('.floating-letters .letter');
 const wrapper = document.querySelector('.landing-wrapper');
 const container = document.querySelector('.container');
-const first_bg = document.querySelector('.first-bg');
-const second_bg = document.querySelector('.second-bg');
 
 // Add hover event listeners to the circle
 circle.addEventListener('mouseenter', () => {
@@ -40,37 +38,15 @@ circle.addEventListener('click', () => {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Selecting the Scratchable Areas link
-// const scratchableAreasLink = document.getElementById("scratchable-areas-link");
-//
-// // Add click event listener to trigger fade-out and redirect
-// scratchableAreasLink.addEventListener("click", () => {
-//     // Add the fade-out class to trigger animation
-//     document.body.classList.add("fade-out");
-//
-//     // Wait for the animation to complete, then redirect
-//     setTimeout(() => {
-//         window.location.href = "scratchable-areas.html";
-//     }, 500); // Match this with the CSS transition duration
-// });
-
-
 // Select elements
 const modalWindow = document.getElementById('modal-window');
 const modalContent = modalWindow.querySelector('.modal-content');
 const modalTitle = modalWindow.querySelector('.modal-title');
 const closeButton = document.getElementById('close-button');
 const reloadButton = document.getElementById('reload-button');
-// const scratchAreas = document.getElementById("scratchable-areas-link");
-// const puzzleArea = document.getElementById("puzzle-link");
 const gameLinks = document.querySelectorAll('.game-area');
 
 // Function to open the modal
-function openModal() {
-    modalWindow.style.display = 'block';
-    modalWindow.classList.remove('hidden');
-    console.log("am deschis");
-    loadContent();
-}
 function openModal(title, contentUrl, initializer = null) {
     console.log("am deschis");
     modalWindow.style.display = 'block';
@@ -90,21 +66,6 @@ function openModal(title, contentUrl, initializer = null) {
             modalContent.innerHTML = '<p>Error loading content.</p>';
         });
 }
-
-// Function to close the modal
-// function closeModal(event) {
-//     console.log("am inchis");
-//     modalWindow.style.display = 'none';
-//     event.stopPropagation(); // Prevents the click event from propagating to the modal's parent
-//
-// }
-//
-// // Function to reload content
-// function reloadContent() {
-//     console.log("am reload");
-//     loadContent();
-// }
-
 
 // Close modal
 function closeModal() {
@@ -144,46 +105,8 @@ gameLinks.forEach(link => {
         }
     });
 });
-
-// Load scratchable-areas.html content into modal
-// function loadContent() {
-//     fetch('scratchable-areas.html')
-//         .then(response => response.text())
-//         .then(html => {
-//             modalContent.innerHTML = html;
-//             // After loading content, initialize the scratchable areas
-//             initializeScratchableAreas();
-//         })
-//         .catch(error => {
-//             console.error('Error loading content:', error);
-//             modalContent.innerHTML = '<p>Error loading content.</p>';
-//         });
-// }
-//
-// // Load puzzle.html content into modal
-// function loadContent() {
-//     fetch('puzzle.html')
-//         .then(response => response.text())
-//         .then(html => {
-//             modalContent.innerHTML = html;
-//             // After loading content, initialize the scratchable areas
-//             initializeScratchableAreas();
-//         })
-//         .catch(error => {
-//             console.error('Error loading content:', error);
-//             modalContent.innerHTML = '<p>Error loading content.</p>';
-//         });
-// }
-
-// Attach event listeners
-// scratchAreas.forEach(area => {
-//     area.addEventListener('click', openModal);
-// });
-// scratchAreas.addEventListener('click', openModal);
 closeButton.addEventListener('click', closeModal);
 reloadButton.addEventListener('click', reloadContent);
-
-
 
 // Make the modal draggable
 let isDragging = false;
@@ -317,5 +240,55 @@ function initializeScratchableAreas(){
         // window.addEventListener("resize", setupCanvas);
         setupCanvas();
         window.addEventListener("resize", setupCanvas);
+    });
+}
+
+function initializePuzzle(){
+    const pieces = document.querySelectorAll('.piece');
+    const dropZone = document.querySelector('.drop-zone');
+    let currentPiece = null;
+
+    // Drag start
+    pieces.forEach(piece => {
+        piece.addEventListener('dragstart', (e) => {
+            currentPiece = piece;
+            // setTimeout(() => piece.classList.add('hidden'), 0); // Temporarily hide the piece
+        });
+
+        piece.addEventListener('dragend', (e) => {
+            if (currentPiece) {
+                // currentPiece.classList.remove('hidden'); // Make it visible again
+                currentPiece = null;
+            }
+        });
+    });
+
+    // Drag over the drop zone
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault(); // Allow drop
+    });
+
+    // Drop the piece in the drop zone
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+
+        if (currentPiece) {
+            // Append the piece to the drop zone
+            dropZone.appendChild(currentPiece);
+
+            // Ensure the piece is positioned relative to the drop zone
+            currentPiece.style.position = 'absolute';
+            const rect = dropZone.getBoundingClientRect();
+
+            // Calculate the position of the piece within the drop zone
+            const offsetX = e.clientX - rect.left; // Mouse X within drop zone
+            const offsetY = e.clientY - rect.top; // Mouse Y within drop zone
+
+            // Update the piece's position to match the drop location
+            currentPiece.style.left = `${offsetX - currentPiece.offsetWidth / 2 }px`;
+            currentPiece.style.top = `${offsetY - currentPiece.offsetHeight / 2 }px`;
+
+            console.log("Piece - currentPiece.offsetWidth dropped at:", currentPiece.style.left, currentPiece.style.top);
+        }
     });
 }
