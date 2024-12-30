@@ -6,10 +6,11 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
     <div id="app">
         <div class="landing-wrapper not-clicked">
             <div class="container hidden">
-                <div id="modal-window" class="hidden">
+                <div id="modal-window" class="hidden-modal">
                     <div class="modal-header">
                         <span class="modal-title"></span>
                         <div class="modal-actions">
@@ -21,33 +22,88 @@
                         <!-- Content will be dynamically loaded here -->
                     </div>
                 </div>
-                <div class="game-area">
-
-                </div>
-                <div class="game-area">
-
-                </div>
-                <div id="puzzle-link" class="game-area">
-                    <p>Puzzle game</p>
-                </div>
-                <div id="scratchable-areas-link" class="game-area">
-                    <p>Scratchable Areas</p>
-                </div>
-            </div>
-                <div class="landing-background first-bg"></div>
-                <div class="landing-background second-bg"></div>
-                <div class="floating-letters">
+                <div class="container-info" style="/* grid-template-columns: 20vw 80vw; */grid-auto-rows: 100vh;background-color: #fbb4a5;background-image: url(../images/gamification-3d-rendering-concept.jpg);background-size: cover;">
                     <p>
-                        <span class="letter g">G</span>
-                        <span class="letter a">a</span>
-                        <span class="letter m">m</span>
-                        <span class="letter e">e</span>
-                        <span class="letter i">i</span>
-                        <span class="letter f">f</span>
-                        <span class="letter y">y</span>
+                    </p>
+                </div>
+                <div class="container-info" style="grid-template-columns: 20vw 80vw;grid-auto-rows: 200px;background-color: #fbb4a5;">
+                    <div style="display: flex;flex-direction: column;align-items: flex-start;grid-row-start: 1;grid-row-end: 3;background-color: #fb9ec6;padding: 50px;">
+                        <h1>WHAT </h1>
+                        <h1>IS </h1>
+                        <h1>GAMIFICATION</h1>
+                    </div>
+
+                    <p style="padding: 50px;">What is Lorem Ipsum?
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+                        </p>
+                    <p style="padding: 50px;">What is Lorem Ipsum?
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+                            Why do we use it?
+                            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+
+                    </p>
+                </div>
+                <div class="container-info" style="grid-template-columns: 60vw 40vw;grid-auto-rows: 600px;background-image: url('images/video-game.jpg');background-position-y: bottom;">
+                    <p style="padding: 50px;background-color: #a888b575;">
+                        Where does it come from?
+                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+                        The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+
+                        Where can I get some?
+                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+                    <div style="display: flex;flex-direction: column;align-items: flex-end;background-color: #8174a070;padding: 100px;">
+                        <h1>WHAT</h1>
+                        <h1>IT</h1>
+                        <h1>IMPLIES</h1>
+                    </div>
+                </div>
+                <div class="container-info" style="grid-template-columns: 40vw 60vw;grid-auto-rows: 400px;">
+                    <div id="puzzle-link" class="game-area">
+                        <p>Puzzle game</p>
+                    </div>
+                    <p style="padding: 50px;">
+                        Where does it come from?
+                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+                        The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+
+                        Where can I get some?
+                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
                     </p>
                 </div>
 
+                <div class="container-info" style="grid-template-columns: 60vw 40vw;grid-auto-rows: 400px;">
+                    <p style="padding: 50px;">
+                        Where does it come from?
+                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+                        The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+
+                        Where can I get some?
+                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+                    <div id="scratchable-areas-link" class="game-area">
+                        <p>Scratchable Areas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="landing-background first-bg"></div>
+            <div class="landing-background second-bg"></div>
+            <div id="letter-header" class="floating-letters">
+                <p>
+                    <span class="letter g">G</span>
+                    <span class="letter a">a</span>
+                    <span class="letter m">m</span>
+                    <span class="letter e">e</span>
+                    <span class="letter i">i</span>
+                    <span class="letter f">f</span>
+                    <span class="letter y">y</span>
+                </p>
+            </div>
 
         </div>
     </div>

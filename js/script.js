@@ -1,5 +1,6 @@
 // Select the circle and all letters
 const circle = document.querySelector('.landing-background.second-bg');
+const letterHeader = document.getElementById('letter-header');
 const letters = document.querySelectorAll('.floating-letters .letter');
 const wrapper = document.querySelector('.landing-wrapper');
 const container = document.querySelector('.container');
@@ -29,11 +30,22 @@ circle.addEventListener('click', () => {
     // Remove "not-clicked" and add "clicked" class
     wrapper.classList.remove('not-clicked');
     wrapper.classList.add('clicked');
+    wrapper.style.overflowY = 'auto';
+    wrapper.style.backgroundColor = '#FCFFC1';
+    circle.style.border = '0';
 
     // Show container with fade-in
     setTimeout(() => {
         container.classList.remove('hidden');
-    }, 500); // Slight delay for smooth transition
+        letterHeader.style.position = 'fixed';
+        letterHeader.style.zIndex = '6';
+        letterHeader.style.height= '120px';
+        letterHeader.style.alignItems = 'flex-end';
+        letterHeader.style.backgroundColor = 'rgba(0,0,0,0.22)';
+    }, 800); // Slight delay for smooth transition
+
+
+
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,12 +124,12 @@ reloadButton.addEventListener('click', reloadContent);
 let isDragging = false;
 let offsetX, offsetY;
 
-const header = modalWindow.querySelector('.modal-header');
-// Prevent opening the modal when clicking the header area
-header.addEventListener('click', (event) => {
+const modal_header = modalWindow.querySelector('.modal-header');
+// Prevent opening the modal when clicking the modal_header area
+modal_header.addEventListener('click', (event) => {
     event.stopPropagation(); // Prevent the click from reaching the modal window
 });
-header.addEventListener('mousedown', (e) => {
+modal_header.addEventListener('mousedown', (e) => {
     isDragging = true;
     offsetX = e.clientX - modalWindow.offsetLeft;
     offsetY = e.clientY - modalWindow.offsetTop;

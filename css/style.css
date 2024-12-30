@@ -79,7 +79,7 @@ html, body {
     transition: transform 1s ease, opacity 0.5s ease;
 }
 .landing-wrapper.clicked .floating-letters {
-    transform: translate(0, 20%); /* Move letters below the container */
+    transform: translate(0, -45%); /* Move letters below the container */
     /*opacity: 0.5; !* Fade letters *!*/
     animation: none; /* Stop floating animation */
 }
@@ -94,6 +94,7 @@ html, body {
     display: flex;
     gap: 10px; /* Space between letters */
 }
+
 
 /* General Letter Animation (Floating and Jumping) */
 .letter {
@@ -116,7 +117,7 @@ html, body {
 }
 
 /* Customize Each Letter Color */
-.letter.g { color: #FF5733; }
+.letter.g { color: #ff5733; }
 .letter.a { color: #33FF57; }
 .letter.m { color: #3357FF; }
 .letter.e { color: #FF33A1; }
@@ -147,40 +148,60 @@ html, body {
 /* ######################################################## */
 /* HOME PAGE */
 .container {
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
     height: 100%;
     width: 100%;
-
-    position: absolute;
+    position: relative;
     z-index: 5;
+    /*overflow-y: auto; !* Enable vertical scrolling *!*/
+    /*margin-top: 200px; !* Add some padding for spacing *!*/
+    gap: 40px; /* Space between .container-info elements */
 }
+
+.container-info{
+    display: inline-grid;
+    justify-content: space-between;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
 .game-area {
-    width: 100px;
-    height: 100px;
-    margin: 20px;
-    background-color: #ccc; /* Placeholder for scratch areas */
+    width: 30vw;
+    height: 30vh;
+    margin: 20px auto;
+    padding: 20px;
+    background-image: url(../images/top-view-hands-holding-controller.jpg);
+    background-size: cover;
     border: 2px solid #333;
     border-radius: 10px;
     cursor: pointer;
 }
+
 .hidden {
     opacity: 0;
     visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .landing-wrapper.clicked .container {
     display: flex;
     opacity: 1; /* Fade in */
-    transition: opacity 3s ease;
+    transition: opacity 5s ease;
+    flex-direction: column;
 }
 
 .scratchable-area {
     position: relative;
     width: 200px;  /* Width of individual scratchable areas */
     height: 150px; /* Height of individual scratchable areas */
-    background-color: #ffebc2;
+    background-color: #FFE893;
     border-radius: 10px;
     margin: 20px;
     display: inline-block; /* Aligns the areas in a row */
@@ -225,7 +246,7 @@ html, body {
 
 /* Header for Modal */
 .modal-header {
-    background-color: #f1f1f1;
+    background-color: #fbb4a5;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -249,10 +270,10 @@ html, body {
     padding: 10px;
     height: calc(100% - 50px); /* Adjust for header height */
     overflow-y: auto;
-    background-color: #F9E6CF;
+    background-color: #fcffc1;
 }
 
-.hidden {
+.hidden-modal {
     display: none;
 }
 
@@ -261,10 +282,10 @@ html, body {
 /* PUZZLE PAGE */
 .puzzle-container {
     text-align: center;
-    background: #F9E6CF;
+    background: #fcffc1;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
 }
 .puzzle-area {
     display: flex;
@@ -376,8 +397,8 @@ html, body {
 }
 
 .drop-zone {
-    width: 100%;
-    height: 300px;
+    width: 80%;
+    height: 400px;
     margin: 20px auto;
     border: 2px dashed #8888ff;
     border-radius: 4px;
