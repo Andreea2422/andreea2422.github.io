@@ -34,18 +34,24 @@ circle.addEventListener('click', () => {
     wrapper.style.backgroundColor = '#FCFFC1';
     circle.style.border = '0';
 
-    // Show container with fade-in
+    // Move the letters up
     setTimeout(() => {
-        container.classList.remove('hidden');
         letterHeader.style.position = 'fixed';
         letterHeader.style.zIndex = '6';
-        letterHeader.style.height= '120px';
+        letterHeader.style.height = '120px';
         letterHeader.style.alignItems = 'flex-end';
-        letterHeader.style.backgroundColor = 'rgba(0,0,0,0.22)';
-    }, 800); // Slight delay for smooth transition
+        letterHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.22)'; // Header background color
+        letters.forEach((letter, index) => {
+            letter.style.animation = 'none';
+        });
+    }, 750); // Slight delay to make it appear as letters move
 
-
-
+    // Show container with fade-in after the header background is visible
+    setTimeout(() => {
+        container.classList.remove('hidden');
+        container.style.opacity = '1'; // Ensure smooth fade-in
+        container.style.transition = 'opacity 0.8s ease'; // Fade-in effect
+    }, 800); // Delay content appearance until header animation completes
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

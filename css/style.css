@@ -79,7 +79,7 @@ html, body {
     transition: transform 1s ease, opacity 0.5s ease;
 }
 .landing-wrapper.clicked .floating-letters {
-    transform: translate(0, -45%); /* Move letters below the container */
+    transform: translate(0, -45%); /* Move letters above the container */
     /*opacity: 0.5; !* Fade letters *!*/
     animation: none; /* Stop floating animation */
 }
