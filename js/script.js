@@ -176,103 +176,89 @@ modalWindow.addEventListener('click', (event) => {
 
 function initializeScratchableAreas(){
     console.log("Window Context: ", window.location.href);
-
+    console.log("Initializing Scratchable Areas...");
     const scratchableAreas = document.querySelectorAll('.scratchable-area');
-    scratchableAreas.forEach((area, index) => {
-        console.log(`Scratchable Area ${index}:`, area.offsetWidth, area.offsetHeight);
-    });
 
     scratchableAreas.forEach(area => {
         const canvas = area.querySelector('.scratch-canvas');
         const hiddenContent = area.querySelector('.hidden-content');
 
-        // Set the 'willReadFrequently' option to true when getting the context
-        const ctx = canvas.getContext('2d', {willReadFrequently: true});
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
         let isDrawing = false;
 
-        // Set up each canvas
+        // Setup canvas size and fill with scratchable color
         function setupCanvas() {
             canvas.width = area.offsetWidth;
             canvas.height = area.offsetHeight;
 
-            // Fill the canvas with a solid color
-            ctx.fillStyle = "#ccc"; // This color can represent the 'scratchable' area
+            // Fill the canvas with a scratchable color
+            ctx.fillStyle = "#ccc";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
 
-        // Common scratch function
+        // Scratch logic
         function scratch(x, y) {
-            // console.log(`Scratching at: ${x}, ${y}`);
-            ctx.globalCompositeOperation = "destination-out"; // Set to clear area
+            ctx.globalCompositeOperation = "destination-out";
             ctx.beginPath();
-            ctx.arc(x, y, 20, 0, Math.PI * 2);
+            ctx.arc(x, y, 20, 0, Math.PI * 2); // Scratch area is a circle with radius 20
             ctx.fill();
         }
-
-        // Mouse event listeners
-        canvas.addEventListener("mousedown", () => { isDrawing = true; });
-        canvas.addEventListener("mouseup", () => { isDrawing = false; });
-        canvas.addEventListener("mousemove", (e) => {
-            if (!isDrawing) return;
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            scratch(x, y);
-        });
-
-        // Touch event listeners
-        canvas.addEventListener("touchstart", (e) => {
-            isDrawing = true;
-            e.preventDefault(); // Prevent scrolling when touching
-        });
-        canvas.addEventListener("touchend", () => {
-            isDrawing = false;
-        });
-        canvas.addEventListener("touchmove", (e) => {
-            if (!isDrawing) return;
-            const rect = canvas.getBoundingClientRect();
-            const touch = e.touches[0]; // Get the first touch point
-            const x = touch.clientX - rect.left;
-            const y = touch.clientY - rect.top;
-            scratch(x, y);
-        });
 
         // Check if enough area has been scratched
         function checkScratchCompletion() {
             console.log("Checking scratch completion...");
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
             let clearedPixels = 0;
+
             for (let i = 3; i < imageData.length; i += 4) {
                 if (imageData[i] === 0) clearedPixels++;
             }
+
             const scratchedPercentage = clearedPixels / (canvas.width * canvas.height);
             console.log(`Scratched Area: ${(scratchedPercentage * 100).toFixed(2)}%`);
-            return scratchedPercentage > 0.5; // Adjust the threshold if needed
+            return scratchedPercentage > 0.5; // Adjust threshold as needed
         }
 
-        // Clear scratch area after enough scratching
-        canvas.addEventListener("mouseup", () => {
+        // Handle mouse events
+        canvas.addEventListener('mousedown', () => { isDrawing = true; });
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
             if (checkScratchCompletion()) {
-                console.log("Scratch area cleared!");
-                canvas.style.display = "none"; // Hide the canvas after enough scratching
-                hiddenContent.style.display = "block"; // Show the hidden content
+                canvas.style.display = "none"; // Hide canvas
+                hiddenContent.style.display = "block"; // Show hidden content
             }
         });
-
-        canvas.addEventListener("touchend", () => {
-            if (checkScratchCompletion()) {
-                console.log("Scratch area cleared!");
-                canvas.style.display = "none"; // Hide the canvas after enough scratching
-                hiddenContent.style.display = "block"; // Show the hidden content
-            }
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            scratch(e.clientX - rect.left, e.clientY - rect.top);
         });
 
-        // Initialize canvas after page load and on resize
-        // window.addEventListener("load", setupCanvas);
-        // window.addEventListener("resize", setupCanvas);
+        // Handle touch events
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevent scrolling on touch devices
+            isDrawing = true;
+        });
+        canvas.addEventListener('touchend', () => {
+            isDrawing = false;
+            if (checkScratchCompletion()) {
+                canvas.style.display = "none"; // Hide canvas
+                hiddenContent.style.display = "block"; // Show hidden content
+            }
+        });
+        canvas.addEventListener('touchmove', (e) => {
+            if (!isDrawing) return;
+            e.preventDefault(); // Prevent scrolling on touch devices
+
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0]; // Get the first touch point
+            scratch(touch.clientX - rect.left, touch.clientY - rect.top);
+        });
+
+        // Initialize canvas on load and resize
         setupCanvas();
-        window.addEventListener("resize", setupCanvas);
+        window.addEventListener('resize', setupCanvas);
     });
 }
 
