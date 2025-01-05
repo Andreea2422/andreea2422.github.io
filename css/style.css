@@ -395,7 +395,7 @@ html, body {
 }
 
 .drop-zone {
-    width: 80%;
+    width: 80vw;
     height: 400px;
     margin: 20px auto;
     border: 2px dashed #8888ff;
@@ -416,27 +416,81 @@ html, body {
 /* //////////////////////////////////////////////////////// */
 /* Extra Small Devices (xs: <576px) */
 @media (max-width: 576px) {
+    .landing-background.second-bg{
+        width: 550px;
+        height: 550px;
+    }
     .container-info {
-        grid-template-columns: 1fr; /* Single-column layout */
-        padding: 10px;
-        grid-auto-rows: unset;
+        grid-template-columns: 1fr !important; /* Single-column layout */
+        grid-auto-rows: unset !important;
+        height: unset !important;
+    }
+    .second-info-title{
+        padding: 50px 100px 50px 100px !important;
+        order: 1;
+    }
+    .second-info{
+        order: 2;
+    }
+    #main-img {
+        grid-auto-rows: 100vh !important;
+    }
+    p{
+        padding: 10px !important;
     }
     .game-area {
-        width: 90vw;
-        height: 40vh; /* Adjusted height */
+        width: 85vw;
     }
     .scratchable-area {
-        width: 80vw; /* Adjust size for small screens */
-        height: auto;
+        width: 80vw;
+        height: 25vh;
     }
+    .puzzle-flex{
+        flex-direction: column !important;
+    }
+    .puzzle-area{
+        gap: 10px;
+        margin-top: 0;
+        display: inline-grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .piece{
+        width: 20vw;
+        height: 10vh;
+    }
+    #piece1::before, #piece2::before, #piece4::before, #piece5::before{
+        background-size: 50vw 25vh;
+        text-shadow: 0 0 5px black;
+    }
+    #piece3{
+        width: 30vw;
+    }
+    #piece3::before{
+        background-size: 30vw 15vh;
+        text-shadow: 0 0 5px black;
+    }
+
 }
 
 /* Small Devices (sm: 576px - 767px) */
 @media (min-width: 576px) and (max-width: 768px) {
     .container-info {
-        grid-template-columns: 1fr; /* Single-column layout */
-        gap: 20px;
-        padding: 20px;
+        grid-template-columns: 1fr !important; /* Single-column layout */
+        grid-auto-rows: unset !important;
+        height: unset !important;
+    }
+    .second-info-title{
+        padding: 50px 100px 50px 100px !important;
+        order: 1;
+    }
+    .second-info{
+        order: 2;
+    }
+    #main-img {
+        grid-auto-rows: 100vh !important;
+    }
+    p{
+        padding: 10px !important;
     }
     .game-area {
         width: 80vw;
@@ -444,24 +498,35 @@ html, body {
     }
     .scratchable-area {
         width: 70vw; /* Adjust size for medium-small screens */
-        height: auto;
+        height: 30vh;
+    }
+    .puzzle-flex{
+        flex-direction: column !important;
+    }
+    .puzzle-area{
+        gap: 0;
+        margin-top: 0;
     }
 }
 
 /* Medium Devices (md: 768px - 991px) */
 @media (min-width: 768px) and (max-width: 992px) {
     .container-info {
-        grid-template-columns: 1fr 1fr; /* Two-column layout */
-        gap: 30px;
-        padding: 30px;
+        grid-template-columns: 1fr 1fr !important;
+        grid-auto-rows: unset !important;
+    }
+    #main-img {
+        grid-auto-rows: 100vh !important;
+    }
+    p{
+        padding: 10px !important;
     }
     .game-area {
-        width: 45vw;
-        height: 30vh;
+        width: 40vw;
     }
     .scratchable-area {
-        width: 40vw; /* Adjust size for medium screens */
-        height: auto;
+        width: 40vw;
+        height: 30vh;
     }
 }
 
@@ -470,8 +535,6 @@ html, body {
     .container-info {
         grid-template-columns: 1fr 1fr !important; /* Two-column layout */
         grid-auto-rows: unset !important;
-        /*gap: 40px;*/
-        /*padding: 40px;*/
     }
     #main-img {
         grid-auto-rows: 100vh !important;
