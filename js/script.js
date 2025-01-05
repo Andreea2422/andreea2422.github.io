@@ -71,6 +71,9 @@ function openModal(title, contentUrl, initializer = null) {
     modalWindow.classList.remove('hidden');
     modalTitle.textContent = title;
 
+    // Change floating letters position to relative
+    toggleFloatingLettersPosition(true);
+
     // Load content into the modal
     fetch(contentUrl)
         .then(response => response.text())
@@ -85,11 +88,23 @@ function openModal(title, contentUrl, initializer = null) {
         });
 }
 
+function toggleFloatingLettersPosition(isModalOpen) {
+    const header = document.getElementById('letter-header');
+    if (isModalOpen) {
+        header.style.position = 'relative';
+    } else {
+        header.style.position = 'fixed';
+    }
+}
+
+
 // Close modal
 function closeModal() {
     console.log("am inchis");
     modalWindow.style.display = 'none';
     modalContent.innerHTML = ''; // Clear content
+    // Reset floating letters position to fixed
+    toggleFloatingLettersPosition(false);
     // event.stopPropagation();
 }
 
@@ -261,52 +276,118 @@ function initializeScratchableAreas(){
     });
 }
 
-function initializePuzzle(){
+function initializePuzzle() {
     const pieces = document.querySelectorAll('.piece');
     const dropZone = document.querySelector('.drop-zone');
     let currentPiece = null;
+    let offsetX = 0, offsetY = 0;
 
-    // Drag start
-    pieces.forEach(piece => {
-        piece.addEventListener('dragstart', (e) => {
-            currentPiece = piece;
-            // setTimeout(() => piece.classList.add('hidden'), 0); // Temporarily hide the piece
-        });
-
-        piece.addEventListener('dragend', (e) => {
-            if (currentPiece) {
-                // currentPiece.classList.remove('hidden'); // Make it visible again
-                currentPiece = null;
-            }
-        });
-    });
-
-    // Drag over the drop zone
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault(); // Allow drop
-    });
-
-    // Drop the piece in the drop zone
-    dropZone.addEventListener('drop', (e) => {
+    const startDrag = (e) => {
         e.preventDefault();
+        currentPiece = e.target;
 
-        if (currentPiece) {
-            // Append the piece to the drop zone
+        let startX, startY;
+        if (e.type === 'touchstart') {
+            const touch = e.touches[0];
+            startX = touch.clientX;
+            startY = touch.clientY;
+        } else {
+            startX = e.clientX;
+            startY = e.clientY;
+        }
+
+        // Calculate offset relative to the piece's current position
+        const pieceRect = currentPiece.getBoundingClientRect();
+        offsetX = startX - pieceRect.left;
+        offsetY = startY - pieceRect.top;
+
+        console.log(`Start Drag: offsetX: ${offsetX}, offsetY: ${offsetY}`);
+
+        // Add global event listeners for dragging
+        document.addEventListener('mousemove', moveDrag);
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchmove', moveDrag);
+        document.addEventListener('touchend', endDrag);
+    };
+
+    const moveDrag = (e) => {
+        if (!currentPiece) return;
+
+        let clientX, clientY;
+        if (e.type === 'touchmove') {
+            const touch = e.touches[0];
+            clientX = touch.clientX;
+            clientY = touch.clientY;
+        } else {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        }
+
+        // Update position relative to viewport
+        const newX = clientX - offsetX;
+        const newY = clientY - offsetY;
+
+        currentPiece.style.position = 'absolute';
+        currentPiece.style.left = `${newX}px`;
+        currentPiece.style.top = `${newY}px`;
+
+        console.log(`Move Drag: clientX - offsetX: ${newX}px ; clientY - offsetY: ${newY}px`);
+    };
+
+    const endDrag = (e) => {
+        if (!currentPiece) return;
+
+        const dropZoneRect = dropZone.getBoundingClientRect();
+
+        let clientX, clientY;
+        if (e.type === 'touchend') {
+            const touch = e.changedTouches[0];
+            clientX = touch.clientX;
+            clientY = touch.clientY;
+        } else {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        }
+
+        // Calculate drop position relative to drop zone
+        const dropOffsetX = clientX - dropZoneRect.left - offsetX;
+        const dropOffsetY = clientY - dropZoneRect.top - offsetY;
+
+        console.log(`End Drag: dropOffsetX: ${dropOffsetX}px ; dropOffsetY: ${dropOffsetY}px`);
+
+        // Check if dropped inside the drop zone
+        if (
+            clientX > dropZoneRect.left &&
+            clientX < dropZoneRect.right &&
+            clientY > dropZoneRect.top &&
+            clientY < dropZoneRect.bottom
+        ) {
+            // Append piece to the drop zone and position it
             dropZone.appendChild(currentPiece);
 
-            // Ensure the piece is positioned relative to the drop zone
-            currentPiece.style.position = 'absolute';
-            const rect = dropZone.getBoundingClientRect();
+            // Position piece relative to drop zone
+            currentPiece.style.left = `${dropOffsetX}px`;
+            currentPiece.style.top = `${dropOffsetY}px`;
 
-            // Calculate the position of the piece within the drop zone
-            const offsetX = e.clientX - rect.left; // Mouse X within drop zone
-            const offsetY = e.clientY - rect.top; // Mouse Y within drop zone
-
-            // Update the piece's position to match the drop location
-            currentPiece.style.left = `${offsetX - currentPiece.offsetWidth / 2 }px`;
-            currentPiece.style.top = `${offsetY - currentPiece.offsetHeight / 2 }px`;
-
-            console.log("Piece - currentPiece.offsetWidth dropped at:", currentPiece.style.left, currentPiece.style.top);
+            console.log(`Piece dropped at: ${currentPiece.style.left} ; ${currentPiece.style.top}`);
         }
+
+        // Remove global event listeners
+        document.removeEventListener('mousemove', moveDrag);
+        document.removeEventListener('mouseup', endDrag);
+        document.removeEventListener('touchmove', moveDrag);
+        document.removeEventListener('touchend', endDrag);
+
+        // Reset current piece
+        currentPiece = null;
+    };
+
+    // Attach event listeners for both mouse and touch
+    pieces.forEach((piece) => {
+        piece.addEventListener('mousedown', startDrag);
+        piece.addEventListener('touchstart', startDrag, { passive: false });
     });
+
+    // Allow drop on the drop zone
+    dropZone.addEventListener('dragover', (e) => e.preventDefault());
 }
