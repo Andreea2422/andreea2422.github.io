@@ -721,6 +721,9 @@ h1, h3, p, ul {
 
 /* Small Devices (sm: 576px - 767px) */
 @media (min-width: 576px) and (max-width: 767px) {
+    h1, h3, p, ul {
+        font-family: "Comic Sans MS", cursive;
+    }
     .landing-background.second-bg{
         width: 80vw;
         height: 60vh;
@@ -794,6 +797,9 @@ h1, h3, p, ul {
 
 /* Medium Devices (md: 768px - 991px) */
 @media (min-width: 768px) and (max-width: 991px) {
+    h1, h3, p, ul {
+        font-family: "Comic Sans MS", cursive;
+    }
     .container-info {
         grid-auto-rows: unset !important;
     }
