@@ -4,7 +4,7 @@ html, body {
     height: 100%;
 }
 h1, h3, p, ul {
-    font-family: "Comic Sans MS", cursive;
+    font-family: "Comic Sans MS", "Arial", cursive;
 }
 a {
     font-size: 5px;
