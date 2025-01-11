@@ -6,7 +6,9 @@ html, body {
 h1, h3, p, ul {
     font-family: "Comic Sans MS", cursive;
 }
-
+a {
+    font-size: 5px;
+}
 /* ######################################################## */
 /* Landing Page */
 #app {
@@ -250,7 +252,7 @@ h1, h3, p, ul {
 
 .hidden-content {
     display: none;
-    padding: 20px;
+    padding: 5px;
     font-size: 1.1rem;
     position: relative;
     z-index: 1;
@@ -674,9 +676,6 @@ h1, h3, p, ul {
         margin-top: 0;
         display: inline-grid;
         grid-template-columns: 1fr 1fr 1fr;
-    }
-    .hidden-content{
-        padding: 10px;
     }
     .piece{
         width: 20vw;
