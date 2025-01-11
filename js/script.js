@@ -54,6 +54,11 @@ circle.addEventListener('click', () => {
     }, 800); // Delay content appearance until header animation completes
 });
 
+
+function scrollToSection(sectionId) {
+    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Selecting the Scratchable Areas link
 // Select elements
@@ -128,11 +133,11 @@ gameLinks.forEach(link => {
 
         // Dynamically handle each game type
         if (gameId === 'scratchable-areas-link') {
-            openModal('Scratchable Areas', 'scratchable-areas.html', initializeScratchableAreas);
+            openModal('Gamification Meaning', 'scratchable-areas.html', initializeScratchableAreas);
             modalWindow.dataset.contentUrl = 'scratchable-areas.html';
             modalWindow.dataset.initializer = 'initializeScratchableAreas';
         } else if (gameId === 'puzzle-link') {
-            openModal('Puzzle Area', 'puzzle.html', initializePuzzle);
+            openModal('Derivative Forms', 'puzzle.html', initializePuzzle);
             modalWindow.dataset.contentUrl = 'puzzle.html';
             modalWindow.dataset.initializer = 'initializePuzzle';
         }
@@ -265,6 +270,10 @@ function initializeScratchableAreas(){
 function initializePuzzle() {
     const pieces = document.querySelectorAll('.piece');
     const dropZone = document.querySelector('.drop-zone');
+    const puzzleInfoArea = document.querySelector(".puzzle-info-area");
+
+    let placedPieces = 0; // Counter for correctly placed pieces
+    const totalPieces = pieces.length;
     let currentPiece = null;
     let offsetX = 0, offsetY = 0;
 
@@ -350,12 +359,19 @@ function initializePuzzle() {
         ) {
             // Append piece to the drop zone and position it
             dropZone.appendChild(currentPiece);
+            currentPiece.classList.add("placed");
+            placedPieces++;
 
             // Position piece relative to drop zone
             currentPiece.style.left = `${dropOffsetX}px`;
             currentPiece.style.top = `${dropOffsetY}px`;
 
             console.log(`Piece dropped at: ${currentPiece.style.left} ; ${currentPiece.style.top}`);
+
+            // Check if all pieces are placed
+            if (placedPieces === totalPieces) {
+                puzzleInfoArea.style.display = "block"; // Show the info area
+            }
         }
 
         // Remove global event listeners
