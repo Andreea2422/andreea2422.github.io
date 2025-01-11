@@ -603,8 +603,8 @@ a {
         font-size: 20px;
     }
     .landing-background.second-bg{
-        width: 100vw;
-        height: 50vh;
+        width: 400px;
+        height: 400px;
     }
     .container-info {
         grid-template-columns: 1fr !important;
