@@ -272,6 +272,7 @@ function initializePuzzle() {
     const dropZone = document.querySelector('.drop-zone');
     const puzzleInfoArea = document.querySelector(".puzzle-info-area");
 
+    const placedPiecesMap = new Set();
     let placedPieces = 0; // Counter for correctly placed pieces
     const totalPieces = pieces.length;
     let currentPiece = null;
@@ -326,7 +327,7 @@ function initializePuzzle() {
         currentPiece.style.left = `${newX}px`;
         currentPiece.style.top = `${newY}px`;
 
-        console.log(`Move Drag: clientX - offsetX: ${newX}px ; clientY - offsetY: ${newY}px`);
+        // console.log(`Move Drag: clientX - offsetX: ${newX}px ; clientY - offsetY: ${newY}px`);
     };
 
     const endDrag = (e) => {
@@ -360,7 +361,7 @@ function initializePuzzle() {
             // Append piece to the drop zone and position it
             dropZone.appendChild(currentPiece);
             currentPiece.classList.add("placed");
-            placedPieces++;
+            placedPiecesMap.add(currentPiece); // Add the piece to the set
 
             // Position piece relative to drop zone
             currentPiece.style.left = `${dropOffsetX}px`;
@@ -369,7 +370,9 @@ function initializePuzzle() {
             console.log(`Piece dropped at: ${currentPiece.style.left} ; ${currentPiece.style.top}`);
 
             // Check if all pieces are placed
-            if (placedPieces === totalPieces) {
+            console.log(placedPiecesMap.size)
+            console.log(totalPieces)
+            if (placedPiecesMap.size === totalPieces) {
                 puzzleInfoArea.style.display = "block"; // Show the info area
             }
         }

@@ -19,8 +19,8 @@ h1, h3, p, ul {
     position: relative;
     height: 100%;
     width: 100%;
-    overflow: hidden; /* Prevent scrollbars during zoom */
-    transition: background-color 0.5s ease; /* Background fade */
+    overflow: hidden;
+    transition: background-color 0.5s ease;
 }
 
 .landing-background {
@@ -29,7 +29,7 @@ h1, h3, p, ul {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 1; /* Base layer */
+    z-index: 1;
 }
 .landing-background.first-bg {
      background-color: #FBB4A5;
@@ -37,34 +37,33 @@ h1, h3, p, ul {
 .landing-background.second-bg {
     will-change: transform;
     background-color: #FCFFC1;
-    border-radius: 50%; /* Ensures the element is a circle */
+    border-radius: 50%;
     border: 10px solid #FFE893;
-    width: 700px; /* Fixed size for circle */
-    height: 700px; /* Width and height must match for a perfect circle */
+    width: 700px;
+    height: 700px;
     position: absolute;
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Shift to align the center */
-    overflow: hidden; /* Optional for any inner content */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
     z-index: 2; /* Higher than first-bg and third-bg */
-    transition: transform 1s ease, width 1s ease, height 1s ease; /* Smooth zoom */
+    transition: transform 1s ease, width 1s ease, height 1s ease;
     cursor: pointer;
 }
 
 /* Circle zooms to fill the viewport */
 .landing-wrapper.clicked .landing-background.second-bg {
-    width: 200vw; /* Dynamically fill the screen width */
-    height: 200vh; /* Dynamically fill the screen height */
-    transform: translate(-50%, -50%); /* Keep it centered */
+    width: 200vw;
+    height: 200vh;
+    transform: translate(-50%, -50%);
     cursor: default;
 }
 
 /* Hover Effect for Circle */
 .landing-background.second-bg:hover {
-    transform: translate(-50%, -50%) scale(1.2); /* Makes circle grow */
+    transform: translate(-50%, -50%) scale(1.2);
 }
 
-/* Floating Letters */
 .floating-letters {
     will-change: transform;
     position: absolute;
@@ -78,12 +77,10 @@ h1, h3, p, ul {
     align-items: center;
     text-align: center;
     pointer-events: none; /* Letters should not block hover on the circle */
-    /*transform: translate(-50%, -50%);*/
     transition: transform 1s ease, opacity 0.5s ease;
 }
 .landing-wrapper.clicked .floating-letters {
     transform: translate(0, -45%); /* Move letters above the container */
-    /*opacity: 0.5; !* Fade letters *!*/
     animation: none; /* Stop floating animation */
 }
 .landing-wrapper.clicked .letter {
@@ -91,24 +88,23 @@ h1, h3, p, ul {
 }
 
 .floating-letters p {
-    font-size: 50px; /* Default size */
+    font-size: 50px;
     font-weight: bold;
     margin: 0;
     display: flex;
-    gap: 10px; /* Space between letters */
+    gap: 10px;
 }
-
 
 /* General Letter Animation (Floating and Jumping) */
 .letter {
     font-family: Arial, sans-serif;
     display: inline-block;
     transform: translateY(0);
-    animation: float 3s infinite ease-in-out; /* Default floating animation */
-    transition: transform 0.3s ease; /* Smooth jump effect */
-    color: #FFFFFF; /* Base color */
+    animation: float 3s infinite ease-in-out;
+    transition: transform 0.3s ease;
+    color: #FFFFFF;
     text-shadow:
-            1px 1px 0 #333333,  /* Shadow layers for 3D effect */
+            1px 1px 0 #333333,
             2px 2px 0 #333333,
             3px 3px 0 #333333,
             4px 4px 0 #333333,
@@ -119,7 +115,6 @@ h1, h3, p, ul {
     transform: scale(1.2); /* Make letters grow at the same time as circle */
 }
 
-/* Customize Each Letter Color */
 .letter.g { color: #ff5733; }
 .letter.a { color: #33FF57; }
 .letter.m { color: #3357FF; }
@@ -128,24 +123,22 @@ h1, h3, p, ul {
 .letter.f { color: #FF8C00; }
 .letter.y { color: #8A2BE2; }
 
-/* Floating Animation */
 @keyframes float {
     0%, 100% {
-        transform: translateY(0); /* Start/End at original position */
+        transform: translateY(0);
     }
     50% {
-        transform: translateY(-10px); /* Float upwards */
+        transform: translateY(-10px);
     }
 }
 
-/* Jump Animation */
 @keyframes jump {
     0% { transform: translateY(0); }
-    50% { transform: translateY(-20px); } /* Jump higher */
-    100% { transform: translateY(0); } /* Return to floating */
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
 }
 .letter.jump {
-    animation: jump 0.5s ease; /* Apply jumping animation temporarily */
+    animation: jump 0.5s ease;
 }
 
 /* ######################################################## */
@@ -172,12 +165,12 @@ h1, h3, p, ul {
 }
 
 .table-of-contents h3:hover {
-    color: #ff5722; /* Highlight color */
-    transform: scale(1.05); /* Slight zoom effect */
+    color: #ff5722;
+    transform: scale(1.05);
 }
 
 .table-of-contents h3:active {
-    color: #d84315; /* Slightly darker color on click */
+    color: #d84315;
 }
 
 .container {
@@ -230,7 +223,7 @@ h1, h3, p, ul {
 
 .landing-wrapper.clicked .container {
     display: flex;
-    opacity: 1; /* Fade in */
+    opacity: 1;
     transition: opacity 5s ease;
     flex-direction: column;
 }
@@ -242,7 +235,7 @@ h1, h3, p, ul {
     background-color: #FFE893;
     border-radius: 10px;
     margin: 15px;
-    display: inline-block; /* Aligns the areas in a row */
+    display: inline-block;
     overflow: hidden;
     border: 5px dotted #FB9EC6;
 }
@@ -259,8 +252,8 @@ h1, h3, p, ul {
     display: none;
     padding: 20px;
     font-size: 1.1rem;
-    position: relative; /* To place it above the canvas */
-    z-index: 1; /* Make sure it appears above the canvas */
+    position: relative;
+    z-index: 1;
 
 }
 
@@ -391,7 +384,6 @@ h1, h3, p, ul {
     resize: both;
 }
 
-/* Header for Modal */
 .modal-header {
     background-color: #fbb4a5;
     padding: 10px;
@@ -415,7 +407,7 @@ h1, h3, p, ul {
 
 .modal-content {
     padding: 10px;
-    height: calc(100% - 50px); /* Adjust for header height */
+    height: calc(100% - 50px);
     overflow-y: auto;
     background-color: #fcffc1;
 }
@@ -432,7 +424,6 @@ h1, h3, p, ul {
     background: #fcffc1;
     padding: 20px;
     border-radius: 8px;
-    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
 }
 .puzzle-flex{
     cursor: grab;
@@ -457,7 +448,7 @@ h1, h3, p, ul {
     height: 180px;
     text-shadow: 0 0 4px black;
     cursor: grab;
-    overflow: hidden; /* Ensure rotated image stays within bounds */
+    overflow: hidden;
 }
 .piece:active {
     cursor: grabbing;
@@ -467,7 +458,7 @@ h1, h3, p, ul {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* Match parent dimensions */
+    width: 100%;
     height: 100%;
     background-image: url("../images/piece_pink.png");
     background-position: center;
@@ -476,43 +467,43 @@ h1, h3, p, ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white; /* Text color */
-    font-weight: bold; /* Optional styling */
+    color: white;
+    font-weight: bold;
 }
 #piece2::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* Match parent dimensions */
+    width: 100%;
     height: 100%;
     background-image: url("../images/piece_yellow.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 400px 400px;
-    transform: rotate(-60deg); /* Rotate the background image */
+    transform: rotate(-60deg);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white; /* Text color */
-    font-weight: bold; /* Optional styling */
+    color: white;
+    font-weight: bold;
 }
 #piece2::after {
-    content: 'Gamified'; /* Text content */
+    content: 'Gamified';
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center the text */
-    z-index: 2; /* Ensure the text is above the background */
-    color: white; /* Text color */
-    font-weight: bold; /* Optional styling */
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: white;
+    font-weight: bold;
 }
 #piece3::before {
     content: 'Gamification';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* Match parent dimensions */
+    width: 100%;
     height: 100%;
     background-image: url("../images/main_piece_purple.png");
     background-position: center;
@@ -521,64 +512,64 @@ h1, h3, p, ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white; /* Text color */
-    font-weight: bold; /* Optional styling */
+    color: white;
+    font-weight: bold;
 }
 #piece4::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* Match parent dimensions */
+    width: 100%;
     height: 100%;
     background-image: url("../images/piece_pink.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 400px 400px;
-    transform: rotate(180deg); /* Rotate the background image */
+    transform: rotate(180deg);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white; /* Text color */
-    font-weight: bold; /* Optional styling */
+    color: white;
+    font-weight: bold;
 }
 #piece4::after {
-    content: 'Metagamification'; /* Text content */
+    content: 'Metagamification';
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center the text */
-    z-index: 2; /* Ensure the text is above the background */
-    color: white; /* Text color */
-    font-weight: bold; /* Optional styling */
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: white;
+    font-weight: bold;
 }
 #piece5::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* Match parent dimensions */
+    width: 100%;
     height: 100%;
     background-image: url("../images/piece_yellow.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 400px 400px;
-    transform: rotate(120deg); /* Rotate the background image */
+    transform: rotate(120deg);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white; /* Text color */
-    font-weight: bold; /* Optional styling */
+    color: white;
+    font-weight: bold;
 }
 #piece5::after {
-    content: 'Degamification'; /* Text content */
+    content: 'Degamification';
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center the text */
-    z-index: 2; /* Ensure the text is above the background */
-    color: white; /* Text color */
-    font-weight: bold; /* Optional styling */
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: white;
+    font-weight: bold;
 }
 
 .drop-zone {
@@ -611,7 +602,7 @@ h1, h3, p, ul {
         height: 50vh;
     }
     .container-info {
-        grid-template-columns: 1fr !important; /* Single-column layout */
+        grid-template-columns: 1fr !important;
         grid-auto-rows: unset !important;
         height: unset !important;
     }
@@ -729,7 +720,7 @@ h1, h3, p, ul {
         height: 60vh;
     }
     .container-info {
-        grid-template-columns: 1fr !important; /* Single-column layout */
+        grid-template-columns: 1fr !important;
         grid-auto-rows: unset !important;
         height: unset !important;
     }
