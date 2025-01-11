@@ -326,8 +326,11 @@ a {
     padding: 50px;
     background-color: #b248dd78;
 }
-.third-info, .forth-info, .puzzle-info-area {
+.third-info, .forth-info {
     padding: 50px;
+}
+.puzzle-info-area {
+    padding: 10px;
 }
 
 .section-content p, .second-info p, .second-info h3, .third-info p, .third-info h3,
@@ -639,7 +642,7 @@ a {
     .section-content {
         padding: 20px;
     }
-    .third-info, .forth-info, .puzzle-info-area {
+    .third-info, .forth-info {
         padding: 10px;
     }
     .section-content p, .second-info p, .second-info h3, .third-info p, .third-info h3,
@@ -749,7 +752,7 @@ a {
     .section-content {
         padding: 40px;
     }
-    .third-info, .forth-info, .puzzle-info-area {
+    .third-info, .forth-info {
         padding: 50px;
     }
     .section-content p, .second-info p, .second-info h3, .third-info p, .third-info h3,
@@ -824,7 +827,7 @@ a {
     .section-content {
         padding: 40px;
     }
-    .third-info, .forth-info, .puzzle-info-area {
+    .third-info, .forth-info {
         padding: 50px;
     }
     .section-content p, .second-info p, .second-info h3, .third-info p, .third-info h3,
