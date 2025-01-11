@@ -79,7 +79,7 @@ html, body {
     transition: transform 1s ease, opacity 0.5s ease;
 }
 .landing-wrapper.clicked .floating-letters {
-    transform: translate(0, 20%); /* Move letters below the container */
+    transform: translate(0, -45%); /* Move letters above the container */
     /*opacity: 0.5; !* Fade letters *!*/
     animation: none; /* Stop floating animation */
 }
@@ -94,6 +94,7 @@ html, body {
     display: flex;
     gap: 10px; /* Space between letters */
 }
+
 
 /* General Letter Animation (Floating and Jumping) */
 .letter {
@@ -116,7 +117,7 @@ html, body {
 }
 
 /* Customize Each Letter Color */
-.letter.g { color: #FF5733; }
+.letter.g { color: #ff5733; }
 .letter.a { color: #33FF57; }
 .letter.m { color: #3357FF; }
 .letter.e { color: #FF33A1; }
@@ -147,40 +148,60 @@ html, body {
 /* ######################################################## */
 /* HOME PAGE */
 .container {
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
     height: 100%;
     width: 100%;
-
-    position: absolute;
+    position: relative;
     z-index: 5;
+    /*overflow-y: auto; !* Enable vertical scrolling *!*/
+    /*margin-top: 200px; !* Add some padding for spacing *!*/
+    gap: 40px; /* Space between .container-info elements */
 }
+
+.container-info{
+    display: inline-grid;
+    justify-content: space-between;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
 .game-area {
-    width: 100px;
-    height: 100px;
-    margin: 20px;
-    background-color: #ccc; /* Placeholder for scratch areas */
+    width: 30vw;
+    height: 30vh;
+    margin: 20px auto;
+    padding: 20px;
+    background-image: url(../images/top-view-hands-holding-controller.jpg);
+    background-size: cover;
     border: 2px solid #333;
     border-radius: 10px;
     cursor: pointer;
 }
+
 .hidden {
     opacity: 0;
     visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .landing-wrapper.clicked .container {
     display: flex;
     opacity: 1; /* Fade in */
-    transition: opacity 3s ease;
+    transition: opacity 5s ease;
+    flex-direction: column;
 }
 
 .scratchable-area {
     position: relative;
     width: 200px;  /* Width of individual scratchable areas */
     height: 150px; /* Height of individual scratchable areas */
-    background-color: #ffebc2;
+    background-color: #FFE893;
     border-radius: 10px;
     margin: 20px;
     display: inline-block; /* Aligns the areas in a row */
@@ -209,15 +230,13 @@ html, body {
 /* WINDOW */
 #modal-window {
     position: fixed;
-    top: 10%;
-    left: 20%;
-    width: 60%;
-    height: 70%;
+    width: 100vw;
+    height: 100vh;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 10;
+    z-index: 1000;
     display: none;
     overflow: hidden;
     resize: both;
@@ -225,7 +244,7 @@ html, body {
 
 /* Header for Modal */
 .modal-header {
-    background-color: #f1f1f1;
+    background-color: #fbb4a5;
     padding: 10px;
     display: flex;
     justify-content: space-between;
@@ -249,10 +268,10 @@ html, body {
     padding: 10px;
     height: calc(100% - 50px); /* Adjust for header height */
     overflow-y: auto;
-    background-color: #F9E6CF;
+    background-color: #fcffc1;
 }
 
-.hidden {
+.hidden-modal {
     display: none;
 }
 
@@ -261,10 +280,10 @@ html, body {
 /* PUZZLE PAGE */
 .puzzle-container {
     text-align: center;
-    background: #F9E6CF;
+    background: #fcffc1;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
 }
 .puzzle-area {
     display: flex;
@@ -376,8 +395,8 @@ html, body {
 }
 
 .drop-zone {
-    width: 100%;
-    height: 300px;
+    width: 80vw;
+    height: 400px;
     margin: 20px auto;
     border: 2px dashed #8888ff;
     border-radius: 4px;
@@ -392,3 +411,146 @@ html, body {
     pointer-events: none;
     color: #8888ff;
 }
+
+/* Responsive Styles */
+/* //////////////////////////////////////////////////////// */
+/* Extra Small Devices (xs: <576px) */
+@media (max-width: 576px) {
+    .landing-background.second-bg{
+        width: 550px;
+        height: 550px;
+    }
+    .container-info {
+        grid-template-columns: 1fr !important; /* Single-column layout */
+        grid-auto-rows: unset !important;
+        height: unset !important;
+    }
+    .second-info-title{
+        padding: 50px 100px 50px 100px !important;
+        order: 1;
+    }
+    .second-info{
+        order: 2;
+    }
+    #main-img {
+        grid-auto-rows: 100vh !important;
+    }
+    p{
+        padding: 10px !important;
+    }
+    .game-area {
+        width: 85vw;
+    }
+    .scratchable-area {
+        width: 80vw;
+        height: 25vh;
+    }
+    .puzzle-flex{
+        flex-direction: column !important;
+    }
+    .puzzle-area{
+        gap: 10px;
+        margin-top: 0;
+        display: inline-grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .piece{
+        width: 20vw;
+        height: 10vh;
+    }
+    #piece1::before, #piece2::before, #piece4::before, #piece5::before{
+        background-size: 50vw 25vh;
+        text-shadow: 0 0 5px black;
+    }
+    #piece3{
+        width: 30vw;
+    }
+    #piece3::before{
+        background-size: 30vw 15vh;
+        text-shadow: 0 0 5px black;
+    }
+
+}
+
+/* Small Devices (sm: 576px - 767px) */
+@media (min-width: 576px) and (max-width: 768px) {
+    .container-info {
+        grid-template-columns: 1fr !important; /* Single-column layout */
+        grid-auto-rows: unset !important;
+        height: unset !important;
+    }
+    .second-info-title{
+        padding: 50px 100px 50px 100px !important;
+        order: 1;
+    }
+    .second-info{
+        order: 2;
+    }
+    #main-img {
+        grid-auto-rows: 100vh !important;
+    }
+    p{
+        padding: 10px !important;
+    }
+    .game-area {
+        width: 80vw;
+        height: 40vh;
+    }
+    .scratchable-area {
+        width: 70vw; /* Adjust size for medium-small screens */
+        height: 30vh;
+    }
+    .puzzle-flex{
+        flex-direction: column !important;
+    }
+    .puzzle-area{
+        gap: 0;
+        margin-top: 0;
+    }
+}
+
+/* Medium Devices (md: 768px - 991px) */
+@media (min-width: 768px) and (max-width: 992px) {
+    .container-info {
+        grid-template-columns: 1fr 1fr !important;
+        grid-auto-rows: unset !important;
+    }
+    #main-img {
+        grid-auto-rows: 100vh !important;
+    }
+    p{
+        padding: 10px !important;
+    }
+    .game-area {
+        width: 40vw;
+    }
+    .scratchable-area {
+        width: 40vw;
+        height: 30vh;
+    }
+}
+
+/* Large Devices (lg: 992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1200px) {
+    .container-info {
+        grid-template-columns: 1fr 1fr !important; /* Two-column layout */
+        grid-auto-rows: unset !important;
+    }
+    #main-img {
+        grid-auto-rows: 100vh !important;
+    }
+    p{
+        padding: 10px !important;
+    }
+    .game-area {
+        width: 35vw;
+        height: 30vh;
+    }
+    .scratchable-area {
+        width: 30vw; /* Adjust size for large screens */
+        height: 30vh;
+    }
+}
+
+
+

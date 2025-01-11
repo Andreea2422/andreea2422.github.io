@@ -1,5 +1,6 @@
 // Select the circle and all letters
 const circle = document.querySelector('.landing-background.second-bg');
+const letterHeader = document.getElementById('letter-header');
 const letters = document.querySelectorAll('.floating-letters .letter');
 const wrapper = document.querySelector('.landing-wrapper');
 const container = document.querySelector('.container');
@@ -29,11 +30,28 @@ circle.addEventListener('click', () => {
     // Remove "not-clicked" and add "clicked" class
     wrapper.classList.remove('not-clicked');
     wrapper.classList.add('clicked');
+    wrapper.style.overflowY = 'auto';
+    wrapper.style.backgroundColor = '#FCFFC1';
+    circle.style.border = '0';
 
-    // Show container with fade-in
+    // Move the letters up
+    setTimeout(() => {
+        letterHeader.style.position = 'fixed';
+        letterHeader.style.zIndex = '6';
+        letterHeader.style.height = '120px';
+        letterHeader.style.alignItems = 'flex-end';
+        letterHeader.style.backgroundColor = 'rgba(0, 0, 0, 0.22)'; // Header background color
+        letters.forEach((letter, index) => {
+            letter.style.animation = 'none';
+        });
+    }, 750); // Slight delay to make it appear as letters move
+
+    // Show container with fade-in after the header background is visible
     setTimeout(() => {
         container.classList.remove('hidden');
-    }, 500); // Slight delay for smooth transition
+        container.style.opacity = '1'; // Ensure smooth fade-in
+        container.style.transition = 'opacity 0.8s ease'; // Fade-in effect
+    }, 800); // Delay content appearance until header animation completes
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,6 +71,9 @@ function openModal(title, contentUrl, initializer = null) {
     modalWindow.classList.remove('hidden');
     modalTitle.textContent = title;
 
+    // Change floating letters position to relative
+    toggleFloatingLettersPosition(true);
+
     // Load content into the modal
     fetch(contentUrl)
         .then(response => response.text())
@@ -67,11 +88,23 @@ function openModal(title, contentUrl, initializer = null) {
         });
 }
 
+function toggleFloatingLettersPosition(isModalOpen) {
+    const header = document.getElementById('letter-header');
+    if (isModalOpen) {
+        header.style.position = 'relative';
+    } else {
+        header.style.position = 'fixed';
+    }
+}
+
+
 // Close modal
 function closeModal() {
     console.log("am inchis");
     modalWindow.style.display = 'none';
     modalContent.innerHTML = ''; // Clear content
+    // Reset floating letters position to fixed
+    toggleFloatingLettersPosition(false);
     // event.stopPropagation();
 }
 
@@ -112,12 +145,12 @@ reloadButton.addEventListener('click', reloadContent);
 let isDragging = false;
 let offsetX, offsetY;
 
-const header = modalWindow.querySelector('.modal-header');
-// Prevent opening the modal when clicking the header area
-header.addEventListener('click', (event) => {
+const modal_header = modalWindow.querySelector('.modal-header');
+// Prevent opening the modal when clicking the modal_header area
+modal_header.addEventListener('click', (event) => {
     event.stopPropagation(); // Prevent the click from reaching the modal window
 });
-header.addEventListener('mousedown', (e) => {
+modal_header.addEventListener('mousedown', (e) => {
     isDragging = true;
     offsetX = e.clientX - modalWindow.offsetLeft;
     offsetY = e.clientY - modalWindow.offsetTop;
@@ -143,152 +176,204 @@ modalWindow.addEventListener('click', (event) => {
 
 function initializeScratchableAreas(){
     console.log("Window Context: ", window.location.href);
-
+    console.log("Initializing Scratchable Areas...");
     const scratchableAreas = document.querySelectorAll('.scratchable-area');
-    scratchableAreas.forEach((area, index) => {
-        console.log(`Scratchable Area ${index}:`, area.offsetWidth, area.offsetHeight);
-    });
 
     scratchableAreas.forEach(area => {
         const canvas = area.querySelector('.scratch-canvas');
         const hiddenContent = area.querySelector('.hidden-content');
 
-        // Set the 'willReadFrequently' option to true when getting the context
-        const ctx = canvas.getContext('2d', {willReadFrequently: true});
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
         let isDrawing = false;
 
-        // Set up each canvas
+        // Setup canvas size and fill with scratchable color
         function setupCanvas() {
             canvas.width = area.offsetWidth;
             canvas.height = area.offsetHeight;
 
-            // Fill the canvas with a solid color
-            ctx.fillStyle = "#ccc"; // This color can represent the 'scratchable' area
+            // Fill the canvas with a scratchable color
+            ctx.fillStyle = "#ccc";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
 
-        // Common scratch function
+        // Scratch logic
         function scratch(x, y) {
-            // console.log(`Scratching at: ${x}, ${y}`);
-            ctx.globalCompositeOperation = "destination-out"; // Set to clear area
+            ctx.globalCompositeOperation = "destination-out";
             ctx.beginPath();
-            ctx.arc(x, y, 20, 0, Math.PI * 2);
+            ctx.arc(x, y, 20, 0, Math.PI * 2); // Scratch area is a circle with radius 20
             ctx.fill();
         }
-
-        // Mouse event listeners
-        canvas.addEventListener("mousedown", () => { isDrawing = true; });
-        canvas.addEventListener("mouseup", () => { isDrawing = false; });
-        canvas.addEventListener("mousemove", (e) => {
-            if (!isDrawing) return;
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            scratch(x, y);
-        });
-
-        // Touch event listeners
-        canvas.addEventListener("touchstart", (e) => {
-            isDrawing = true;
-            e.preventDefault(); // Prevent scrolling when touching
-        });
-        canvas.addEventListener("touchend", () => {
-            isDrawing = false;
-        });
-        canvas.addEventListener("touchmove", (e) => {
-            if (!isDrawing) return;
-            const rect = canvas.getBoundingClientRect();
-            const touch = e.touches[0]; // Get the first touch point
-            const x = touch.clientX - rect.left;
-            const y = touch.clientY - rect.top;
-            scratch(x, y);
-        });
 
         // Check if enough area has been scratched
         function checkScratchCompletion() {
             console.log("Checking scratch completion...");
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
             let clearedPixels = 0;
+
             for (let i = 3; i < imageData.length; i += 4) {
                 if (imageData[i] === 0) clearedPixels++;
             }
+
             const scratchedPercentage = clearedPixels / (canvas.width * canvas.height);
             console.log(`Scratched Area: ${(scratchedPercentage * 100).toFixed(2)}%`);
-            return scratchedPercentage > 0.5; // Adjust the threshold if needed
+            return scratchedPercentage > 0.5; // Adjust threshold as needed
         }
 
-        // Clear scratch area after enough scratching
-        canvas.addEventListener("mouseup", () => {
+        // Handle mouse events
+        canvas.addEventListener('mousedown', () => { isDrawing = true; });
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
             if (checkScratchCompletion()) {
-                console.log("Scratch area cleared!");
-                canvas.style.display = "none"; // Hide the canvas after enough scratching
-                hiddenContent.style.display = "block"; // Show the hidden content
+                canvas.style.display = "none"; // Hide canvas
+                hiddenContent.style.display = "block"; // Show hidden content
             }
         });
-
-        canvas.addEventListener("touchend", () => {
-            if (checkScratchCompletion()) {
-                console.log("Scratch area cleared!");
-                canvas.style.display = "none"; // Hide the canvas after enough scratching
-                hiddenContent.style.display = "block"; // Show the hidden content
-            }
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            scratch(e.clientX - rect.left, e.clientY - rect.top);
         });
 
-        // Initialize canvas after page load and on resize
-        // window.addEventListener("load", setupCanvas);
-        // window.addEventListener("resize", setupCanvas);
+        // Handle touch events
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevent scrolling on touch devices
+            isDrawing = true;
+        });
+        canvas.addEventListener('touchend', () => {
+            isDrawing = false;
+            if (checkScratchCompletion()) {
+                canvas.style.display = "none"; // Hide canvas
+                hiddenContent.style.display = "block"; // Show hidden content
+            }
+        });
+        canvas.addEventListener('touchmove', (e) => {
+            if (!isDrawing) return;
+            e.preventDefault(); // Prevent scrolling on touch devices
+
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0]; // Get the first touch point
+            scratch(touch.clientX - rect.left, touch.clientY - rect.top);
+        });
+
+        // Initialize canvas on load and resize
         setupCanvas();
-        window.addEventListener("resize", setupCanvas);
+        window.addEventListener('resize', setupCanvas);
     });
 }
 
-function initializePuzzle(){
+function initializePuzzle() {
     const pieces = document.querySelectorAll('.piece');
     const dropZone = document.querySelector('.drop-zone');
     let currentPiece = null;
+    let offsetX = 0, offsetY = 0;
 
-    // Drag start
-    pieces.forEach(piece => {
-        piece.addEventListener('dragstart', (e) => {
-            currentPiece = piece;
-            // setTimeout(() => piece.classList.add('hidden'), 0); // Temporarily hide the piece
-        });
-
-        piece.addEventListener('dragend', (e) => {
-            if (currentPiece) {
-                // currentPiece.classList.remove('hidden'); // Make it visible again
-                currentPiece = null;
-            }
-        });
-    });
-
-    // Drag over the drop zone
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault(); // Allow drop
-    });
-
-    // Drop the piece in the drop zone
-    dropZone.addEventListener('drop', (e) => {
+    const startDrag = (e) => {
         e.preventDefault();
+        currentPiece = e.target;
 
-        if (currentPiece) {
-            // Append the piece to the drop zone
+        let startX, startY;
+        if (e.type === 'touchstart') {
+            const touch = e.touches[0];
+            startX = touch.clientX;
+            startY = touch.clientY;
+        } else {
+            startX = e.clientX;
+            startY = e.clientY;
+        }
+
+        // Calculate offset relative to the piece's current position
+        const pieceRect = currentPiece.getBoundingClientRect();
+        offsetX = startX - pieceRect.left;
+        offsetY = startY - pieceRect.top;
+
+        console.log(`Start Drag: offsetX: ${offsetX}, offsetY: ${offsetY}`);
+
+        // Add global event listeners for dragging
+        document.addEventListener('mousemove', moveDrag);
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchmove', moveDrag);
+        document.addEventListener('touchend', endDrag);
+    };
+
+    const moveDrag = (e) => {
+        if (!currentPiece) return;
+
+        let clientX, clientY;
+        if (e.type === 'touchmove') {
+            const touch = e.touches[0];
+            clientX = touch.clientX;
+            clientY = touch.clientY;
+        } else {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        }
+
+        // Update position relative to viewport
+        const newX = clientX - offsetX;
+        const newY = clientY - offsetY;
+
+        currentPiece.style.position = 'absolute';
+        currentPiece.style.left = `${newX}px`;
+        currentPiece.style.top = `${newY}px`;
+
+        console.log(`Move Drag: clientX - offsetX: ${newX}px ; clientY - offsetY: ${newY}px`);
+    };
+
+    const endDrag = (e) => {
+        if (!currentPiece) return;
+
+        const dropZoneRect = dropZone.getBoundingClientRect();
+
+        let clientX, clientY;
+        if (e.type === 'touchend') {
+            const touch = e.changedTouches[0];
+            clientX = touch.clientX;
+            clientY = touch.clientY;
+        } else {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        }
+
+        // Calculate drop position relative to drop zone
+        const dropOffsetX = clientX - dropZoneRect.left - offsetX;
+        const dropOffsetY = clientY - dropZoneRect.top - offsetY;
+
+        console.log(`End Drag: dropOffsetX: ${dropOffsetX}px ; dropOffsetY: ${dropOffsetY}px`);
+
+        // Check if dropped inside the drop zone
+        if (
+            clientX > dropZoneRect.left &&
+            clientX < dropZoneRect.right &&
+            clientY > dropZoneRect.top &&
+            clientY < dropZoneRect.bottom
+        ) {
+            // Append piece to the drop zone and position it
             dropZone.appendChild(currentPiece);
 
-            // Ensure the piece is positioned relative to the drop zone
-            currentPiece.style.position = 'absolute';
-            const rect = dropZone.getBoundingClientRect();
+            // Position piece relative to drop zone
+            currentPiece.style.left = `${dropOffsetX}px`;
+            currentPiece.style.top = `${dropOffsetY}px`;
 
-            // Calculate the position of the piece within the drop zone
-            const offsetX = e.clientX - rect.left; // Mouse X within drop zone
-            const offsetY = e.clientY - rect.top; // Mouse Y within drop zone
-
-            // Update the piece's position to match the drop location
-            currentPiece.style.left = `${offsetX - currentPiece.offsetWidth / 2 }px`;
-            currentPiece.style.top = `${offsetY - currentPiece.offsetHeight / 2 }px`;
-
-            console.log("Piece - currentPiece.offsetWidth dropped at:", currentPiece.style.left, currentPiece.style.top);
+            console.log(`Piece dropped at: ${currentPiece.style.left} ; ${currentPiece.style.top}`);
         }
+
+        // Remove global event listeners
+        document.removeEventListener('mousemove', moveDrag);
+        document.removeEventListener('mouseup', endDrag);
+        document.removeEventListener('touchmove', moveDrag);
+        document.removeEventListener('touchend', endDrag);
+
+        // Reset current piece
+        currentPiece = null;
+    };
+
+    // Attach event listeners for both mouse and touch
+    pieces.forEach((piece) => {
+        piece.addEventListener('mousedown', startDrag);
+        piece.addEventListener('touchstart', startDrag, { passive: false });
     });
+
+    // Allow drop on the drop zone
+    dropZone.addEventListener('dragover', (e) => e.preventDefault());
 }
