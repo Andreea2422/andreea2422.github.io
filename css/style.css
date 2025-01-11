@@ -3,6 +3,9 @@ html, body {
     padding: 0;
     height: 100%;
 }
+h1, h3, p, ul {
+    font-family: cursive;
+}
 
 /* ######################################################## */
 /* Landing Page */
@@ -147,6 +150,36 @@ html, body {
 
 /* ######################################################## */
 /* HOME PAGE */
+.freepik-story{
+    width: 40vw;
+}
+
+.table-of-contents {
+    background-image: url("../images/pink-sticky-note.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 58vh;
+    align-content: center;
+    padding: 50px;
+}
+
+.table-of-contents h3 {
+    font-size: 20px;
+    color: #333;
+    margin: 30px 0;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.table-of-contents h3:hover {
+    color: #ff5722; /* Highlight color */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+.table-of-contents h3:active {
+    color: #d84315; /* Slightly darker color on click */
+}
+
 .container {
     justify-content: flex-start;
     align-items: center;
@@ -155,16 +188,12 @@ html, body {
     width: 100%;
     position: relative;
     z-index: 5;
-    /*overflow-y: auto; !* Enable vertical scrolling *!*/
-    /*margin-top: 200px; !* Add some padding for spacing *!*/
-    gap: 40px; /* Space between .container-info elements */
 }
 
 .container-info{
     display: inline-grid;
     justify-content: space-between;
     text-align: center;
-    height: 100%;
     width: 100%;
     align-items: center;
     align-content: center;
@@ -173,15 +202,24 @@ html, body {
 }
 
 .game-area {
-    width: 30vw;
-    height: 30vh;
+    width: 40vw;
+    height: 40vh;
     margin: 20px auto;
     padding: 20px;
-    background-image: url(../images/top-view-hands-holding-controller.jpg);
-    background-size: cover;
-    border: 2px solid #333;
-    border-radius: 10px;
     cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.game-area:hover {
+     transform: scale(1.10);
+}
+#puzzle-link{
+    background-image: url(../images/puzzle-game.png);
+}
+
+#scratchable-areas-link{
+    background-image: url(../images/controller.png);
 }
 
 .hidden {
@@ -199,13 +237,14 @@ html, body {
 
 .scratchable-area {
     position: relative;
-    width: 200px;  /* Width of individual scratchable areas */
-    height: 150px; /* Height of individual scratchable areas */
+    width: 30vw;
+    height: 30vh;
     background-color: #FFE893;
     border-radius: 10px;
-    margin: 20px;
+    margin: 15px;
     display: inline-block; /* Aligns the areas in a row */
     overflow: hidden;
+    border: 5px dotted #FB9EC6;
 }
 .scratch-canvas {
     position: absolute;
@@ -225,6 +264,116 @@ html, body {
 
 }
 
+#main-img{
+    grid-auto-rows: 100vh;
+    background-color: #FCFFC1;
+    padding: 20px;
+    border-bottom: 10px dotted #fbb4a5;
+}
+#what-is-gamification{
+    grid-template-columns: 25vw 75vw;
+    background-color: #fbb4a5;
+    padding: 20px;
+    border: 10px dotted #FCFFC1;
+    align-items: start;
+}
+#gamification-in-various-contexts{
+    grid-template-columns: 70vw 30vw;
+    background-image: url('../images/top-view-hands-holding-controller.jpg');
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+    align-items: start;
+}
+#derivative-forms{
+    grid-template-columns: 50vw 50vw;
+    padding: 40px;
+    background-color: #fbb4a5;
+    border: 10px dotted #FCFFC1;
+}
+#what-gamification-means-to-others{
+    grid-template-columns: 50vw 50vw;
+    padding: 40px;
+    border: 10px dotted #FBB4A5;
+}
+
+.section-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+.second-info-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: #b248dd78;
+    padding: 50px;
+    margin-top: 25px;
+}
+
+
+.section-title h1, .second-info-title h1, .third-info h1, .forth-info h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    margin: 5px 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.section-content {
+    padding: 40px;
+}
+.second-info{
+    margin: 25px;
+    padding: 50px;
+    background-color: #b248dd78;
+}
+.third-info, .forth-info, .puzzle-info-area {
+    padding: 50px;
+}
+
+.section-content p, .second-info p, .second-info h3, .third-info p, .third-info h3,
+.forth-info p, .forth-info h3, .puzzle-container p, .puzzle-info-area h3,
+.scratch-container p, .scratchable-area h3{
+    font-size: 18px;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 20px;
+}
+.second-info p, .second-info h3, .second-info-title h1 {
+    color: white;
+}
+
+.section-content ul, .puzzle-info-area ul {
+    list-style-position: inside;
+    text-align: start;
+    padding: 0;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.section-content ul li, .puzzle-info-area ul li {
+    font-size: 18px;
+    color: #555;
+    position: relative;
+    display: list-item;
+    margin-bottom: 5px;
+}
+
+.section-content ul li::marker, .puzzle-info-area ul li::marker {
+    content: '';
+}
+
+.section-content ul li::before {
+    content: "✓";
+    position: absolute;
+    left: -20px;
+    color: #ff5722;
+    font-size: 18px;
+}
 
 /* ######################################################## */
 /* WINDOW */
@@ -285,6 +434,16 @@ html, body {
     border-radius: 8px;
     /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
 }
+.puzzle-flex{
+    cursor: grab;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.puzzle-info-area{
+    display: none;
+}
 .puzzle-area {
     display: flex;
     flex-wrap: wrap;
@@ -296,9 +455,7 @@ html, body {
     position: relative;
     width: 180px;
     height: 180px;
-    /*background: #ffcccb;*/
-    /*border: 2px solid #ff8888;*/
-    /*border-radius: 4px;*/
+    text-shadow: 0 0 4px black;
     cursor: grab;
     overflow: hidden; /* Ensure rotated image stays within bounds */
 }
@@ -306,7 +463,7 @@ html, body {
     cursor: grabbing;
 }
 #piece1::before {
-    content: 'Challenges and Objectives';
+    content: 'Gamify';
     position: absolute;
     top: 0;
     left: 0;
@@ -337,6 +494,16 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white; /* Text color */
+    font-weight: bold; /* Optional styling */
+}
+#piece2::after {
+    content: 'Gamified'; /* Text content */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the text */
+    z-index: 2; /* Ensure the text is above the background */
     color: white; /* Text color */
     font-weight: bold; /* Optional styling */
 }
@@ -375,6 +542,16 @@ html, body {
     color: white; /* Text color */
     font-weight: bold; /* Optional styling */
 }
+#piece4::after {
+    content: 'Metagamification'; /* Text content */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the text */
+    z-index: 2; /* Ensure the text is above the background */
+    color: white; /* Text color */
+    font-weight: bold; /* Optional styling */
+}
 #piece5::before {
     content: '';
     position: absolute;
@@ -390,6 +567,16 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white; /* Text color */
+    font-weight: bold; /* Optional styling */
+}
+#piece5::after {
+    content: 'Degamification'; /* Text content */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the text */
+    z-index: 2; /* Ensure the text is above the background */
     color: white; /* Text color */
     font-weight: bold; /* Optional styling */
 }
@@ -415,35 +602,78 @@ html, body {
 /* Responsive Styles */
 /* //////////////////////////////////////////////////////// */
 /* Extra Small Devices (xs: <576px) */
-@media (max-width: 576px) {
+@media (max-width: 575px) {
+    h1{
+        font-size: 20px;
+    }
     .landing-background.second-bg{
-        width: 550px;
-        height: 550px;
+        width: 100vw;
+        height: 50vh;
     }
     .container-info {
         grid-template-columns: 1fr !important; /* Single-column layout */
         grid-auto-rows: unset !important;
         height: unset !important;
     }
+    .table-of-contents{
+        margin: 20px 0;
+        padding: 20px 0;
+        height: 35vh;
+        width: 80vw;
+    }
+    .freepik-story{
+        width: 100vw;
+    }
+    .table-of-contents h3{
+        font-size: 12px;
+    }
     .second-info-title{
-        padding: 50px 100px 50px 100px !important;
         order: 1;
+        padding: 30px 10px ;
+        margin-top: unset;
     }
     .second-info{
         order: 2;
+        margin: unset ;
+        padding: 10px ;
     }
-    #main-img {
-        grid-auto-rows: 100vh !important;
+    .section-title h1, .second-info-title h1, .third-info h1, .forth-info h1 {
+        font-size: 20px;
     }
-    p{
-        padding: 10px !important;
+    .section-title{
+        margin-top: unset;
+    }
+    .section-content {
+        padding: 20px;
+    }
+    .third-info, .forth-info, .puzzle-info-area {
+        padding: 10px;
+    }
+    .section-content p, .second-info p, .second-info h3, .third-info p, .third-info h3,
+    .forth-info p, .forth-info h3, .puzzle-container p, .puzzle-info-area h3,
+    .scratch-container p, .scratchable-area h3{
+        font-size: 12px;
+        line-height: 1.2;
+        margin-bottom: unset;
+    }
+    .section-content ul li, .puzzle-info-area ul li {
+        font-size: 12px;
+        margin-top: 10px;
+    }
+    .section-content ul li::before {
+        font-size: 12px;
+        left: -13px;
+    }
+    #derivative-forms, #what-gamification-means-to-others{
+        padding: 5px;
     }
     .game-area {
-        width: 85vw;
+        width: 35vw;
+        height: 20vh;
     }
     .scratchable-area {
         width: 80vw;
-        height: 25vh;
+        height: 15vh;
     }
     .puzzle-flex{
         flex-direction: column !important;
@@ -454,6 +684,9 @@ html, body {
         display: inline-grid;
         grid-template-columns: 1fr 1fr 1fr;
     }
+    .hidden-content{
+        padding: 10px;
+    }
     .piece{
         width: 20vw;
         height: 10vh;
@@ -462,42 +695,92 @@ html, body {
         background-size: 50vw 25vh;
         text-shadow: 0 0 5px black;
     }
+    #piece1::before, #piece2::after, #piece4::after, #piece5::after{
+        font-weight: bold;
+        text-align: center;
+        font-size: 10px;
+        line-height: 1.2;
+        word-wrap: break-word;
+        width: 90%;
+    }
     #piece3{
         width: 30vw;
     }
     #piece3::before{
-        background-size: 30vw 15vh;
+        background-size: 30vw 14vh;
         text-shadow: 0 0 5px black;
+        font-weight: bold;
+        text-align: center;
+        font-size: 10px;
+        line-height: 1.2;
+        word-wrap: break-word;
+        width: 90%;
     }
 
 }
 
 /* Small Devices (sm: 576px - 767px) */
-@media (min-width: 576px) and (max-width: 768px) {
+@media (min-width: 576px) and (max-width: 767px) {
+    .landing-background.second-bg{
+        width: 80vw;
+        height: 60vh;
+    }
     .container-info {
         grid-template-columns: 1fr !important; /* Single-column layout */
         grid-auto-rows: unset !important;
         height: unset !important;
     }
+    .table-of-contents{
+        padding: unset;
+         height: 55vh;
+         width: 80vw;
+     }
+    .freepik-story{
+        width: 100vw;
+    }
+    .table-of-contents h3{
+        font-size: 18px;
+    }
     .second-info-title{
-        padding: 50px 100px 50px 100px !important;
         order: 1;
+        padding: 30px 10px ;
     }
     .second-info{
         order: 2;
+        margin: unset ;
+        padding: 10px ;
+    }
+    .section-title h1, .second-info-title h1, .third-info h1, .forth-info h1 {
+        font-size: 30px;
+    }
+    .section-content {
+        padding: 40px;
+    }
+    .third-info, .forth-info, .puzzle-info-area {
+        padding: 50px;
+    }
+    .section-content p, .second-info p, .second-info h3, .third-info p, .third-info h3,
+    .forth-info p, .forth-info h3, .puzzle-container p, .puzzle-info-area h3,
+    .scratch-container p, .scratchable-area h3{
+        font-size: 15px;
+        line-height: 1.2;
+        margin-bottom: unset;
+    }
+    .section-content ul li, .puzzle-info-area ul li {
+        font-size: 15px;
+    }
+    .section-content ul li::before {
+        font-size: 15px;
     }
     #main-img {
         grid-auto-rows: 100vh !important;
     }
-    p{
-        padding: 10px !important;
-    }
     .game-area {
-        width: 80vw;
-        height: 40vh;
+        width: 40vw;
+        height: 25vh;
     }
     .scratchable-area {
-        width: 70vw; /* Adjust size for medium-small screens */
+        width: 40vw;
         height: 30vh;
     }
     .puzzle-flex{
@@ -510,45 +793,109 @@ html, body {
 }
 
 /* Medium Devices (md: 768px - 991px) */
-@media (min-width: 768px) and (max-width: 992px) {
+@media (min-width: 768px) and (max-width: 991px) {
     .container-info {
-        grid-template-columns: 1fr 1fr !important;
         grid-auto-rows: unset !important;
+    }
+    #what-is-gamification{
+        grid-template-columns: 1fr 1fr;
+    }
+    #gamification-in-various-contexts{
+        grid-template-columns: 60vw 40vw;
+        padding: unset;
+    }
+    .table-of-contents{
+        height: 30vh;
+        width: 28vw;
+    }
+    .freepik-story{
+        width: 50vw;
+    }
+    .table-of-contents h3{
+        font-size: 15px;
+    }
+    .second-info-title{
+        padding: 30px 10px ;
+    }
+    .second-info{
+        margin: unset ;
+        padding: unset ;
+    }
+    .section-title h1, .second-info-title h1, .third-info h1, .forth-info h1 {
+        font-size: 30px;
+        margin: 5px 0;
+    }
+    .section-content {
+        padding: 40px;
+    }
+    .third-info, .forth-info, .puzzle-info-area {
+        padding: 50px;
+    }
+    .section-content p, .second-info p, .second-info h3, .third-info p, .third-info h3,
+    .forth-info p, .forth-info h3, .puzzle-container p, .puzzle-info-area h3,
+    .scratch-container p, .scratchable-area h3{
+        font-size: 15px;
+        line-height: 1.2;
+        margin-bottom: unset;
+    }
+    .section-content ul li, .puzzle-info-area ul li {
+        font-size: 15px;
+    }
+    .section-content ul li::before {
+        font-size: 15px;
     }
     #main-img {
         grid-auto-rows: 100vh !important;
     }
-    p{
-        padding: 10px !important;
-    }
     .game-area {
-        width: 40vw;
+        width: 30vw;
     }
     .scratchable-area {
         width: 40vw;
-        height: 30vh;
+        height: 25vh;
     }
 }
 
 /* Large Devices (lg: 992px - 1199px) */
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 992px) and (max-width: 1199px) {
     .container-info {
-        grid-template-columns: 1fr 1fr !important; /* Two-column layout */
         grid-auto-rows: unset !important;
+    }
+    #what-is-gamification{
+        grid-template-columns: 35vw 65vw;
+    }
+    #gamification-in-various-contexts{
+        grid-template-columns: 60vw 40vw;
+    }
+    .table-of-contents{
+        height: 40vh;
+        width: 28vw;
+    }
+    .table-of-contents h3{
+        font-size: 18px;
+    }
+    .second-info-title{
+        padding: 30px 10px 30px 50px;
+    }
+    .second-info{
+        margin: unset ;
+        padding: unset ;
     }
     #main-img {
         grid-auto-rows: 100vh !important;
-    }
-    p{
-        padding: 10px !important;
     }
     .game-area {
         width: 35vw;
         height: 30vh;
     }
     .scratchable-area {
-        width: 30vw; /* Adjust size for large screens */
-        height: 30vh;
+        width: 35vw;
+        height: 25vh;
+    }
+    .scratchable-area p, .scratchable-area h3 {
+        font-size: 15px;
+        line-height: 1.2;
+        margin-bottom: unset;
     }
 }
 
