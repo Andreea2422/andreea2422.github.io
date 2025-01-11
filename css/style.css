@@ -3,6 +3,9 @@ html, body {
     padding: 0;
     height: 100%;
 }
+h1, h3, p, ul {
+    font-family: cursive;
+}
 
 /* ######################################################## */
 /* Landing Page */
@@ -147,6 +150,10 @@ html, body {
 
 /* ######################################################## */
 /* HOME PAGE */
+.freepik-story{
+    width: 40vw;
+}
+
 .table-of-contents {
     background-image: url("../images/pink-sticky-note.png");
     background-repeat: no-repeat;
@@ -157,7 +164,6 @@ html, body {
 }
 
 .table-of-contents h3 {
-    font-family: 'Arial', sans-serif;
     font-size: 20px;
     color: #333;
     margin: 30px 0;
@@ -182,7 +188,6 @@ html, body {
     width: 100%;
     position: relative;
     z-index: 5;
-    /*gap: 40px; !* Space between .container-info elements *!*/
 }
 
 .container-info{
@@ -270,6 +275,7 @@ html, body {
     background-color: #fbb4a5;
     padding: 20px;
     border: 10px dotted #FCFFC1;
+    align-items: start;
 }
 #gamification-in-various-contexts{
     grid-template-columns: 70vw 30vw;
@@ -278,6 +284,7 @@ html, body {
     background-repeat: no-repeat;
     background-size: cover;
     padding: 20px;
+    align-items: start;
 }
 #derivative-forms{
     grid-template-columns: 50vw 50vw;
@@ -296,6 +303,7 @@ html, body {
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 20px;
+    margin-top: 40px;
 }
 .second-info-title {
     display: flex;
@@ -303,10 +311,11 @@ html, body {
     align-items: flex-end;
     background-color: #b248dd78;
     padding: 50px;
+    margin-top: 25px;
 }
 
 
-.section-title h1, .second-info-title h1 {
+.section-title h1, .second-info-title h1, .third-info h1, .forth-info h1 {
     font-size: 36px;
     font-weight: bold;
     color: #333;
@@ -349,7 +358,6 @@ html, body {
 .section-content ul li, .puzzle-info-area ul li {
     font-size: 18px;
     color: #555;
-    /*margin-bottom: 10px;*/
     position: relative;
     display: list-item;
     margin-bottom: 5px;
@@ -594,37 +602,78 @@ html, body {
 /* Responsive Styles */
 /* //////////////////////////////////////////////////////// */
 /* Extra Small Devices (xs: <576px) */
-@media (max-width: 576px) {
+@media (max-width: 575px) {
+    h1{
+        font-size: 20px;
+    }
     .landing-background.second-bg{
-        width: 550px;
-        height: 550px;
+        width: 100vw;
+        height: 50vh;
     }
     .container-info {
         grid-template-columns: 1fr !important; /* Single-column layout */
         grid-auto-rows: unset !important;
         height: unset !important;
     }
+    .table-of-contents{
+        margin: 20px 0;
+        padding: 20px 0;
+        height: 35vh;
+        width: 80vw;
+    }
+    .freepik-story{
+        width: 100vw;
+    }
+    .table-of-contents h3{
+        font-size: 12px;
+    }
     .second-info-title{
-        padding: 50px !important;
         order: 1;
+        padding: 30px 10px ;
+        margin-top: unset;
     }
     .second-info{
         order: 2;
-        margin: 25px !important;
-        padding: unset !important;
+        margin: unset ;
+        padding: 10px ;
     }
-    #main-img {
-        grid-auto-rows: 100vh !important;
+    .section-title h1, .second-info-title h1, .third-info h1, .forth-info h1 {
+        font-size: 20px;
     }
-    p{
-        padding: 10px !important;
+    .section-title{
+        margin-top: unset;
+    }
+    .section-content {
+        padding: 20px;
+    }
+    .third-info, .forth-info, .puzzle-info-area {
+        padding: 10px;
+    }
+    .section-content p, .second-info p, .second-info h3, .third-info p, .third-info h3,
+    .forth-info p, .forth-info h3, .puzzle-container p, .puzzle-info-area h3,
+    .scratch-container p, .scratchable-area h3{
+        font-size: 12px;
+        line-height: 1.2;
+        margin-bottom: unset;
+    }
+    .section-content ul li, .puzzle-info-area ul li {
+        font-size: 12px;
+        margin-top: 10px;
+    }
+    .section-content ul li::before {
+        font-size: 12px;
+        left: -13px;
+    }
+    #derivative-forms, #what-gamification-means-to-others{
+        padding: 5px;
     }
     .game-area {
-        width: 85vw;
+        width: 35vw;
+        height: 20vh;
     }
     .scratchable-area {
         width: 80vw;
-        height: 25vh;
+        height: 15vh;
     }
     .puzzle-flex{
         flex-direction: column !important;
@@ -635,6 +684,9 @@ html, body {
         display: inline-grid;
         grid-template-columns: 1fr 1fr 1fr;
     }
+    .hidden-content{
+        padding: 10px;
+    }
     .piece{
         width: 20vw;
         height: 10vh;
@@ -643,44 +695,92 @@ html, body {
         background-size: 50vw 25vh;
         text-shadow: 0 0 5px black;
     }
+    #piece1::before, #piece2::after, #piece4::after, #piece5::after{
+        font-weight: bold;
+        text-align: center;
+        font-size: 10px;
+        line-height: 1.2;
+        word-wrap: break-word;
+        width: 90%;
+    }
     #piece3{
         width: 30vw;
     }
     #piece3::before{
-        background-size: 30vw 15vh;
+        background-size: 30vw 14vh;
         text-shadow: 0 0 5px black;
+        font-weight: bold;
+        text-align: center;
+        font-size: 10px;
+        line-height: 1.2;
+        word-wrap: break-word;
+        width: 90%;
     }
 
 }
 
 /* Small Devices (sm: 576px - 767px) */
-@media (min-width: 576px) and (max-width: 768px) {
+@media (min-width: 576px) and (max-width: 767px) {
+    .landing-background.second-bg{
+        width: 80vw;
+        height: 60vh;
+    }
     .container-info {
         grid-template-columns: 1fr !important; /* Single-column layout */
         grid-auto-rows: unset !important;
         height: unset !important;
     }
+    .table-of-contents{
+        padding: unset;
+         height: 55vh;
+         width: 80vw;
+     }
+    .freepik-story{
+        width: 100vw;
+    }
+    .table-of-contents h3{
+        font-size: 18px;
+    }
     .second-info-title{
-        padding: 50px 100px 50px 100px !important;
         order: 1;
+        padding: 30px 10px ;
     }
     .second-info{
         order: 2;
-        margin: unset !important;
-        padding: unset !important;
+        margin: unset ;
+        padding: 10px ;
+    }
+    .section-title h1, .second-info-title h1, .third-info h1, .forth-info h1 {
+        font-size: 30px;
+    }
+    .section-content {
+        padding: 40px;
+    }
+    .third-info, .forth-info, .puzzle-info-area {
+        padding: 50px;
+    }
+    .section-content p, .second-info p, .second-info h3, .third-info p, .third-info h3,
+    .forth-info p, .forth-info h3, .puzzle-container p, .puzzle-info-area h3,
+    .scratch-container p, .scratchable-area h3{
+        font-size: 15px;
+        line-height: 1.2;
+        margin-bottom: unset;
+    }
+    .section-content ul li, .puzzle-info-area ul li {
+        font-size: 15px;
+    }
+    .section-content ul li::before {
+        font-size: 15px;
     }
     #main-img {
         grid-auto-rows: 100vh !important;
     }
-    p{
-        padding: 10px !important;
-    }
     .game-area {
-        width: 80vw;
-        height: 40vh;
+        width: 40vw;
+        height: 25vh;
     }
     .scratchable-area {
-        width: 70vw; /* Adjust size for medium-small screens */
+        width: 40vw;
         height: 30vh;
     }
     .puzzle-flex{
@@ -693,59 +793,109 @@ html, body {
 }
 
 /* Medium Devices (md: 768px - 991px) */
-@media (min-width: 768px) and (max-width: 992px) {
+@media (min-width: 768px) and (max-width: 991px) {
     .container-info {
-        grid-template-columns: 1fr 1fr !important;
         grid-auto-rows: unset !important;
     }
+    #what-is-gamification{
+        grid-template-columns: 1fr 1fr;
+    }
+    #gamification-in-various-contexts{
+        grid-template-columns: 60vw 40vw;
+        padding: unset;
+    }
+    .table-of-contents{
+        height: 30vh;
+        width: 28vw;
+    }
+    .freepik-story{
+        width: 50vw;
+    }
+    .table-of-contents h3{
+        font-size: 15px;
+    }
     .second-info-title{
-        padding: 30px 10px 30px 50px !important;
+        padding: 30px 10px ;
     }
     .second-info{
-        margin: unset !important;
-        padding: unset !important;
+        margin: unset ;
+        padding: unset ;
+    }
+    .section-title h1, .second-info-title h1, .third-info h1, .forth-info h1 {
+        font-size: 30px;
+        margin: 5px 0;
+    }
+    .section-content {
+        padding: 40px;
+    }
+    .third-info, .forth-info, .puzzle-info-area {
+        padding: 50px;
+    }
+    .section-content p, .second-info p, .second-info h3, .third-info p, .third-info h3,
+    .forth-info p, .forth-info h3, .puzzle-container p, .puzzle-info-area h3,
+    .scratch-container p, .scratchable-area h3{
+        font-size: 15px;
+        line-height: 1.2;
+        margin-bottom: unset;
+    }
+    .section-content ul li, .puzzle-info-area ul li {
+        font-size: 15px;
+    }
+    .section-content ul li::before {
+        font-size: 15px;
     }
     #main-img {
         grid-auto-rows: 100vh !important;
     }
-    p{
-        padding: 10px !important;
-    }
     .game-area {
-        width: 40vw;
+        width: 30vw;
     }
     .scratchable-area {
         width: 40vw;
-        height: 30vh;
+        height: 25vh;
     }
 }
 
 /* Large Devices (lg: 992px - 1199px) */
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 992px) and (max-width: 1199px) {
     .container-info {
-        grid-template-columns: 1fr 1fr !important; /* Two-column layout */
         grid-auto-rows: unset !important;
     }
+    #what-is-gamification{
+        grid-template-columns: 35vw 65vw;
+    }
+    #gamification-in-various-contexts{
+        grid-template-columns: 60vw 40vw;
+    }
+    .table-of-contents{
+        height: 40vh;
+        width: 28vw;
+    }
+    .table-of-contents h3{
+        font-size: 18px;
+    }
     .second-info-title{
-        padding: 30px 10px 30px 50px !important;
+        padding: 30px 10px 30px 50px;
     }
     .second-info{
-        margin: unset !important;
-        padding: unset !important;
+        margin: unset ;
+        padding: unset ;
     }
     #main-img {
         grid-auto-rows: 100vh !important;
-    }
-    p{
-        padding: 10px !important;
     }
     .game-area {
         width: 35vw;
         height: 30vh;
     }
     .scratchable-area {
-        width: 30vw; /* Adjust size for large screens */
-        height: 30vh;
+        width: 35vw;
+        height: 25vh;
+    }
+    .scratchable-area p, .scratchable-area h3 {
+        font-size: 15px;
+        line-height: 1.2;
+        margin-bottom: unset;
     }
 }
 
